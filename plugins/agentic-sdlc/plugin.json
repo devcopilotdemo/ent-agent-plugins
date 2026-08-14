@@ -1,0 +1,22 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "agentic-sdlc",
+  "version": "1.0.0",
+  "description": "Agentic SDLC team: orchestrator, planner, backend/frontend developers, designer, tester, and devops agents, plus secret and PII scanning hooks that block sensitive data from reaching the codebase.",
+  "author": {
+    "name": "devcopilotdemo"
+  },
+  "homepage": "https://github.com/devcopilotdemo/ent-agent-plugins",
+  "repository": "https://github.com/devcopilotdemo/ent-agent-plugins",
+  "license": "MIT",
+  "keywords": [
+    "sdlc",
+    "multi-agent",
+    "orchestration",
+    "planning",
+    "testing",
+    "devops",
+    "secrets-scanning",
+    "pii"
+  ]
+}

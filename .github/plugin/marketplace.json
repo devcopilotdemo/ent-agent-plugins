@@ -1,0 +1,36 @@
+{
+  "name": "ent-agent-plugins",
+  "owner": {
+    "name": "devcopilotdemo",
+    "email": "copilot@devcopilotdemo.invalid"
+  },
+  "metadata": {
+    "description": "Enterprise agent plugin marketplace for devcopilotdemo",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "agentic-sdlc",
+      "source": "plugins/agentic-sdlc",
+      "description": "Agentic SDLC team: orchestrator, planner, backend/frontend developers, designer, tester, and devops agents, plus secret and PII scanning hooks that block sensitive data from reaching the codebase.",
+      "version": "1.0.0",
+      "author": {
+        "name": "devcopilotdemo"
+      },
+      "homepage": "https://github.com/devcopilotdemo/ent-agent-plugins",
+      "repository": "https://github.com/devcopilotdemo/ent-agent-plugins",
+      "license": "MIT",
+      "category": "development",
+      "keywords": [
+        "sdlc",
+        "multi-agent",
+        "orchestration",
+        "planning",
+        "testing",
+        "devops",
+        "secrets-scanning",
+        "pii"
+      ]
+    }
+  ]
+}

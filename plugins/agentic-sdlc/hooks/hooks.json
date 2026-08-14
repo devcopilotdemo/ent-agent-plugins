@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "hooks": {
+    "preToolUse": [
+      {
+        "type": "command",
+        "matcher": "shell",
+        "bash": "${PLUGIN_ROOT}/hooks/scripts/guard-commit.sh",
+        "powershell": "${PLUGIN_ROOT}/hooks/scripts/guard-commit.ps1",
+        "cwd": ".",
+        "env": {
+          "SCAN_MODE": "block",
+          "SCAN_SCOPE": "staged"
+        },
+        "timeoutSec": 60
+      }
+    ],
+    "sessionEnd": [
+      {
+        "type": "command",
+        "bash": "${PLUGIN_ROOT}/hooks/scripts/scan-secrets.sh",
+        "powershell": "${PLUGIN_ROOT}/hooks/scripts/scan-secrets.ps1",
+        "cwd": ".",
+        "env": {
+          "SCAN_MODE": "warn",
+          "SCAN_SCOPE": "diff"
+        },
+        "timeoutSec": 60
+      },
+      {
+        "type": "command",
+        "bash": "${PLUGIN_ROOT}/hooks/scripts/scan-pii.sh",
+        "powershell": "${PLUGIN_ROOT}/hooks/scripts/scan-pii.ps1",
+        "cwd": ".",
+        "env": {
+          "SCAN_MODE": "warn",
+          "SCAN_SCOPE": "diff"
+        },
+        "timeoutSec": 60
+      }
+    ]
+  }
+}
