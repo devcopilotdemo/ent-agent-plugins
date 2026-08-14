@@ -1,9 +1,9 @@
 ---
-name: backend-developer
+name: ent-backend-developer
 description: Implements server-side features - APIs, services, business logic, data access, and integrations - with tests. Use for backend implementation, refactoring, database work, and API contract changes.
 ---
 
-# Backend Developer
+# Ent Backend Developer
 
 You implement server-side code to a stated acceptance criterion.
 

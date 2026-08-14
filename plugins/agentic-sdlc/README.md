@@ -1,6 +1,6 @@
 # agentic-sdlc
 
-A focused agentic SDLC delivery team for GitHub Copilot: seven specialist agents coordinated by an orchestrator, plus hooks that keep secrets and personal data out of the codebase.
+A focused agentic SDLC delivery team for GitHub Copilot: seven specialist agents coordinated by ent-orchestrator, plus hooks that keep secrets and personal data out of the codebase.
 
 Conforms to the [Agent Plugins Specification 1.0.0](https://github.com/agentplugins/agent-plugins-spec/blob/main/spec/1.0.0.md).
 
@@ -12,15 +12,15 @@ AI-assisted coding tends to be ad-hoc: a request goes in, a diff comes out, and 
 
 | Agent | Role |
 | --- | --- |
-| `orchestrator` | Coordinates the team, delegates work, enforces quality gates, drives delivery to verified completion |
-| `planner` | Turns a request into a sequenced plan with testable acceptance criteria and agent ownership |
-| `backend-developer` | APIs, services, business logic, data access, integrations — with tests |
-| `frontend-developer` | UI implementation, client state, data wiring, accessibility — with tests |
-| `designer` | UX flows, interaction specs, design-system-conformant component specifications |
-| `tester` | Test strategy and automated verification that acceptance criteria are actually met |
-| `devops` | CI/CD, infrastructure as code, configuration, secret management, release, observability |
+| `ent-orchestrator` | Coordinates the team, delegates work, enforces quality gates, drives delivery to verified completion |
+| `ent-planner` | Turns a request into a sequenced plan with testable acceptance criteria and agent ownership |
+| `ent-backend-developer` | APIs, services, business logic, data access, integrations — with tests |
+| `ent-frontend-developer` | UI implementation, client state, data wiring, accessibility — with tests |
+| `ent-designer` | UX flows, interaction specs, design-system-conformant component specifications |
+| `ent-tester` | Test strategy and automated verification that acceptance criteria are actually met |
+| `ent-devops` | CI/CD, infrastructure as code, configuration, secret management, release, observability |
 
-Start with `orchestrator` for any non-trivial change; invoke a specialist directly when the scope is already clear.
+Start with `ent-orchestrator` for any non-trivial change; invoke a specialist directly when the scope is already clear.
 
 ## Hooks
 
@@ -72,13 +72,13 @@ copilot plugin install devcopilotdemo/ent-agent-plugins:plugins/agentic-sdlc
 agentic-sdlc/
 ├── plugin.json
 ├── agents/
-│   ├── orchestrator.agent.md
-│   ├── planner.agent.md
-│   ├── backend-developer.agent.md
-│   ├── frontend-developer.agent.md
-│   ├── designer.agent.md
-│   ├── tester.agent.md
-│   └── devops.agent.md
+│   ├── ent-orchestrator.agent.md
+│   ├── ent-planner.agent.md
+│   ├── ent-backend-developer.agent.md
+│   ├── ent-frontend-developer.agent.md
+│   ├── ent-designer.agent.md
+│   ├── ent-tester.agent.md
+│   └── ent-devops.agent.md
 ├── skills/
 │   └── sdlc-workflow/SKILL.md
 └── hooks/
