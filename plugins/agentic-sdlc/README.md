@@ -89,8 +89,8 @@ agentic-sdlc/
 │   └── ent-devops.agent.md
 ├── skills/
 │   └── sdlc-workflow/SKILL.md
+├── hooks.json
 └── hooks/
-    ├── hooks.json
     └── scripts/
         ├── scan-common.sh / scan-common.ps1
         ├── scan-secrets.sh / scan-secrets.ps1

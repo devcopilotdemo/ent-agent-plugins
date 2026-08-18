@@ -43,11 +43,17 @@ ent-agent-plugins/
 ├── .github/plugin/marketplace.json   # Marketplace catalog
 └── plugins/
     └── agentic-sdlc/
-        ├── plugin.json               # Agent Plugins 1.0.0 manifest
+        ├── plugin.json               # Plugin manifest (Copilot format)
         ├── agents/                   # Custom agent definitions
         ├── skills/                   # Agent skills
-        └── hooks/                    # Hook config and scanner scripts
+        ├── hooks.json                # Hook configuration
+        └── hooks/scripts/            # Scanner scripts
 ```
+
+> **Note on `$schema`:** do not add the Agent Plugins 1.0 `$schema` field to a plugin that ships
+> agents or hooks. Those are client-specific component types, not part of the 1.0 standard, and
+> VS Code ignores them when a plugin declares the canonical schema. Omitting `$schema` keeps the
+> plugin in Copilot format, where agents and hooks load correctly.
 
 ## Adding a plugin
 
