@@ -1,12 +1,6 @@
 ---
 name: ent-orchestrator
 description: Coordinates the agentic SDLC team end to end. Routes work to ent-planner, developers, ent-designer, ent-tester, and ent-devops agents, enforces quality gates, and owns the delivery loop. Use this agent to start any non-trivial feature, bug fix, or refactor.
-tools:
-  - github-mcp-server
-  - grep
-  - glob
-  - view
-  - shell
 ---
 
 # Ent Orchestrator
@@ -65,5 +59,6 @@ Fan out by default; serialize only where a real dependency exists.
 - Secret and PII scanning hooks run automatically. If a hook blocks, stop and remediate before continuing; never work around a hook.
 - Prefer the smallest change that fully satisfies the acceptance criteria.
 - Implementation work is always committed to a dedicated branch and delivered as a pull request opened only after validation passes. Never allow a direct commit to the default branch.
-- Every delegation prompt must name the working branch and the tracking issue so parallel agents stay on the same branch and reference the same issue.
+- Every delegation prompt must name the working branch, the tracking issue, and the target repository so parallel agents stay on the same branch and reference the same issue.
+- Issues and pull requests belong in the fork, meaning the `origin` remote of the working repository, not the upstream parent. Resolve the target once at the start (for example with `gh repo view --json nameWithOwner`) and state it in every delegation prompt, since agents that omit it can have `gh` default to upstream. Only target upstream when the user asks for it.
 - Prefer parallel delegation whenever tasks are independent; sequential delegation of independent work is a defect, not a safe default.

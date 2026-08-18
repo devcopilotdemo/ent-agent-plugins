@@ -55,10 +55,17 @@ ent-agent-plugins/
 > VS Code ignores them when a plugin declares the canonical schema. Omitting `$schema` keeps the
 > plugin in Copilot format, where agents and hooks load correctly.
 
+> **Note on agent `tools:`:** avoid pinning a `tools:` list in agent frontmatter unless the plugin
+> targets a single client. Tool names are client-specific: Copilot CLI uses `view`, `grep`, `glob`,
+> and `shell`, while VS Code uses `search`, `edit`, `runCommands`, and `<server>/*` for MCP tools.
+> A list written for one client is rejected as invalid by the other. Omitting `tools:` grants the
+> agent the client's default set, which keeps the plugin portable. Describe the intended capability
+> in the agent body instead.
+
 ## Adding a plugin
 
-1. Create `plugins/<plugin-name>/` with a `plugin.json` manifest declaring `$schema`, `name`, `version`, and `description`.
-2. Add components in the conventional locations: `agents/`, `skills/<skill>/SKILL.md`, `hooks/hooks.json`, `mcp.json`.
+1. Create `plugins/<plugin-name>/` with a `plugin.json` manifest declaring `name`, `version`, and `description`. Do not declare `$schema` (see the note above).
+2. Add components in the conventional locations: `agents/`, `skills/<skill>/SKILL.md`, `hooks.json`, `mcp.json`.
 3. Register the plugin in `.github/plugin/marketplace.json` with its `name`, `source` path, `version`, and `description`. Write `source` as a relative path starting with `./` (for example `./plugins/my-plugin`). Copilot CLI accepts the path with or without the prefix, but VS Code follows the Claude marketplace schema, which requires it and otherwise fails with "Plugin source directory not found in repository".
 4. Keep the `version` in `marketplace.json` in sync with the plugin's own `plugin.json`. Clients use it to detect updates.
 5. Validate locally with `copilot plugin marketplace add .` before opening a pull request.

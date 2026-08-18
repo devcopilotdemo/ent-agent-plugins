@@ -37,6 +37,7 @@ These are non-negotiable regardless of stage:
 - **No unverified completion.** Evidence means a passing test or a command output, not a plausible diff.
 - **No work on the default branch.** Implementation lands on a dedicated branch and is delivered as a pull request, opened only after validation passes and linking its tracking issue.
 - **No untraceable change.** Every plan maps to a GitHub issue, created or updated with the user's approval.
+- **Fork is the default target.** Issues and pull requests go to the `origin` remote of the working repository, not the upstream parent. Resolve the target explicitly rather than letting `gh` fall back to upstream.
 - **No secrets or personal data in the repository.** The plugin's `preToolUse` hook blocks commits containing detected secrets or PII, and `sessionEnd` hooks report anything that slipped through. Remediate findings; never bypass a hook.
 - **Least privilege by default.** New credentials, tokens, roles, and permissions are scoped to the minimum needed and reviewed explicitly.
 
@@ -48,6 +49,7 @@ When delegating, give the receiving agent everything it needs - it has no memory
 Task: <what to do>
 Context: <relevant files, prior decisions, constraints>
 Branch: <working branch>
+Repository: <owner/repo of the fork to target for issues and PRs>
 Issue: <#n>
 Acceptance criteria: <observable, verifiable outcome>
 Out of scope: <what not to touch>
