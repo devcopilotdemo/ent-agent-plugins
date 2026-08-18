@@ -22,6 +22,14 @@ AI-assisted coding tends to be ad-hoc: a request goes in, a diff comes out, and 
 
 Start with `ent-orchestrator` for any non-trivial change; invoke a specialist directly when the scope is already clear.
 
+## Delivery conventions
+
+- **Traceability.** `ent-planner` maps every plan to a GitHub issue and proposes creating or updating it — with your approval — before implementation starts.
+- **Branch and PR by default.** Implementation never lands on the default branch. Developers and `ent-devops` work on a dedicated branch and open a pull request linking the tracking issue, only after validation passes.
+- **GitHub Actions.** `ent-devops` assumes GitHub Actions in `.github/workflows/` as the default CI/CD system.
+- **Parallel delegation.** `ent-orchestrator` groups plan tasks into waves and fans them out in parallel wherever files and contracts are disjoint.
+- These agents use the GitHub MCP server (`github-mcp-server`) for issue and pull request operations.
+
 ## Hooks
 
 Two scanners ship with the plugin. Both run cross-platform (Bash on Linux/macOS, PowerShell on Windows).
