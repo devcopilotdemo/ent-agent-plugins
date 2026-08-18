@@ -136,8 +136,8 @@ function Invoke-ScanFile {
     if (-not (Test-Path -LiteralPath $ReadPath -PathType Leaf)) { return }
     if (-not (Test-ShouldScan $DisplayPath)) { return }
 
-    $lines = Get-Content -LiteralPath $ReadPath -ErrorAction SilentlyContinue
-    if ($null -eq $lines) { return }
+    $lines = @(Get-Content -LiteralPath $ReadPath -ErrorAction SilentlyContinue)
+    if ($lines.Count -eq 0) { return }
 
     for ($i = 0; $i -lt $lines.Count; $i++) {
         $line = $lines[$i]
