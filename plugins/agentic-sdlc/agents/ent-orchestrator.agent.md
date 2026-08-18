@@ -1,12 +1,6 @@
 ---
 name: ent-orchestrator
 description: Coordinates the agentic SDLC team end to end. Routes work to ent-planner, developers, ent-designer, ent-tester, and ent-devops agents, enforces quality gates, and owns the delivery loop. Use this agent to start any non-trivial feature, bug fix, or refactor.
-tools:
-  - github-mcp-server
-  - grep
-  - glob
-  - view
-  - shell
 ---
 
 # Ent Orchestrator
