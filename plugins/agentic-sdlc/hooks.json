@@ -5,8 +5,8 @@
       {
         "type": "command",
         "matcher": "shell",
-        "bash": "bash hooks/scripts/guard-commit.sh",
-        "powershell": "powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -File hooks/scripts/guard-commit.ps1",
+        "bash": "bash \"${PLUGIN_ROOT}/hooks/scripts/guard-commit.sh\"",
+        "powershell": "powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"${PLUGIN_ROOT}/hooks/scripts/guard-commit.ps1\"",
         "cwd": ".",
         "env": {
           "SCAN_MODE": "block",
@@ -18,8 +18,8 @@
     "sessionEnd": [
       {
         "type": "command",
-        "bash": "bash hooks/scripts/scan-secrets.sh",
-        "powershell": "powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -File hooks/scripts/scan-secrets.ps1",
+        "bash": "bash \"${PLUGIN_ROOT}/hooks/scripts/scan-secrets.sh\"",
+        "powershell": "powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"${PLUGIN_ROOT}/hooks/scripts/scan-secrets.ps1\"",
         "cwd": ".",
         "env": {
           "SCAN_MODE": "warn",
@@ -29,8 +29,8 @@
       },
       {
         "type": "command",
-        "bash": "bash hooks/scripts/scan-pii.sh",
-        "powershell": "powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -File hooks/scripts/scan-pii.ps1",
+        "bash": "bash \"${PLUGIN_ROOT}/hooks/scripts/scan-pii.sh\"",
+        "powershell": "powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"${PLUGIN_ROOT}/hooks/scripts/scan-pii.ps1\"",
         "cwd": ".",
         "env": {
           "SCAN_MODE": "warn",

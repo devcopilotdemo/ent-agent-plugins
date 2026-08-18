@@ -1,6 +1,6 @@
 {
   "name": "agentic-sdlc",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Agentic SDLC team: ent-orchestrator, ent-planner, ent-backend-developer, ent-frontend-developer, ent-designer, ent-tester, and ent-devops agents, plus secret and PII scanning hooks that block sensitive data from reaching the codebase.",
   "author": {
     "name": "devcopilotdemo"
