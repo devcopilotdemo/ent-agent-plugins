@@ -59,8 +59,9 @@ ent-agent-plugins/
 
 1. Create `plugins/<plugin-name>/` with a `plugin.json` manifest declaring `$schema`, `name`, `version`, and `description`.
 2. Add components in the conventional locations: `agents/`, `skills/<skill>/SKILL.md`, `hooks/hooks.json`, `mcp.json`.
-3. Register the plugin in `.github/plugin/marketplace.json` with its `name`, `source` path, `version`, and `description`.
-4. Validate locally with `copilot plugin marketplace add .` before opening a pull request.
+3. Register the plugin in `.github/plugin/marketplace.json` with its `name`, `source` path, `version`, and `description`. Write `source` as a relative path starting with `./` (for example `./plugins/my-plugin`). Copilot CLI accepts the path with or without the prefix, but VS Code follows the Claude marketplace schema, which requires it and otherwise fails with "Plugin source directory not found in repository".
+4. Keep the `version` in `marketplace.json` in sync with the plugin's own `plugin.json`. Clients use it to detect updates.
+5. Validate locally with `copilot plugin marketplace add .` before opening a pull request.
 
 Plugin names must be lowercase alphanumeric with hyphens or periods, must start and end alphanumerically, and must not contain consecutive hyphens or periods.
 
