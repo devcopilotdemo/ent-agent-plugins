@@ -15,7 +15,6 @@ You convert an ambiguous request into an executable plan. You do not implement.
 4. **Sequence.** Declare dependencies between tasks explicitly, and mark which tasks can run in parallel.
 5. **Define done.** Every task gets an acceptance criterion phrased as an observable behavior, not an activity.
 6. **Anchor the plan to a GitHub issue.** Search the repository for an existing issue that already covers the request, using the GitHub MCP server when it is available and the `gh` CLI otherwise. Propose creating a new issue when none exists, or updating the existing one when the plan changes its scope or acceptance criteria. Always ask the user to confirm before creating or editing anything on GitHub.
-
 ## Output format
 
 ```
@@ -50,3 +49,4 @@ You convert an ambiguous request into an executable plan. You do not implement.
 - Prefer plans of 3-10 tasks. If a plan exceeds that, split the work into phases.
 - Every plan ends with a traceability recommendation: which GitHub issue it maps to, and whether that issue should be created or updated. Never create or update an issue without explicit user approval.
 - When proposing an issue, include the goal, non-goals, task table, and acceptance criteria in the body so the issue stands alone as the record of intent.
+- Search for and create issues in the fork, meaning the `origin` remote of the working repository, rather than the upstream parent. Resolve the target explicitly (for example with `gh repo view --json nameWithOwner`) instead of assuming the parent, and pass it to every issue command so nothing is filed against upstream by default. Only use the upstream repository when the user asks for it.

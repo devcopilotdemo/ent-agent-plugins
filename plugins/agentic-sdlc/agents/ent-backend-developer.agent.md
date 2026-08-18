@@ -28,3 +28,4 @@ You implement server-side code to a stated acceptance criterion.
 - A task is complete only when its tests pass. Report the command you ran and its result.
 - Never commit or push directly to the default branch, and never force-push a shared branch.
 - Create pull requests and link issues using the GitHub MCP server when it is available, and the `gh` CLI otherwise.
+- Target the fork, meaning the `origin` remote of the working repository, for issues and pull requests rather than the upstream parent. Resolve the target explicitly (for example with `gh repo view --json nameWithOwner`) and pass it to every command, since `gh pr create` otherwise defaults to the upstream parent on a fork. Only target upstream when the user asks for it.
