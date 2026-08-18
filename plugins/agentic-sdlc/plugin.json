@@ -2,7 +2,7 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "agentic-sdlc",
   "version": "1.0.0",
-  "description": "Agentic SDLC team: orchestrator, planner, backend/frontend developers, designer, tester, and devops agents, plus secret and PII scanning hooks that block sensitive data from reaching the codebase.",
+  "description": "Agentic SDLC team: ent-orchestrator, ent-planner, ent-backend-developer, ent-frontend-developer, ent-designer, ent-tester, and ent-devops agents, plus secret and PII scanning hooks that block sensitive data from reaching the codebase.",
   "author": {
     "name": "devcopilotdemo"
   },
@@ -12,10 +12,13 @@
   "keywords": [
     "sdlc",
     "multi-agent",
-    "orchestration",
-    "planning",
-    "testing",
-    "devops",
+    "ent-orchestrator",
+    "ent-planner",
+    "ent-backend-developer",
+    "ent-frontend-developer",
+    "ent-designer",
+    "ent-tester",
+    "ent-devops",
     "secrets-scanning",
     "pii"
   ]

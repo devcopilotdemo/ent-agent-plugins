@@ -11,20 +11,20 @@ This skill describes the delivery loop the `agentic-sdlc` plugin implements, and
 
 | Stage | Owner | Exit condition |
 | --- | --- | --- |
-| Plan | `planner` | Every task has an owner and a testable acceptance criterion |
-| Design | `designer` | Flow, component, and state specs exist for all user-facing change |
-| Build | `backend-developer`, `frontend-developer` | Code implements the criteria and its tests pass locally |
-| Verify | `tester` | Automated tests cover every acceptance criterion and pass |
-| Ship | `devops` | CI is green, the change is deployable, and rollback is documented |
+| Plan | `ent-planner` | Every task has an owner and a testable acceptance criterion |
+| Design | `ent-designer` | Flow, component, and state specs exist for all user-facing change |
+| Build | `ent-backend-developer`, `ent-frontend-developer` | Code implements the criteria and its tests pass locally |
+| Verify | `ent-tester` | Automated tests cover every acceptance criterion and pass |
+| Ship | `ent-devops` | CI is green, the change is deployable, and rollback is documented |
 
-`orchestrator` owns the loop itself: it delegates, checks exit conditions, and decides when to move between stages.
+`ent-orchestrator` owns the loop itself: it delegates, checks exit conditions, and decides when to move between stages.
 
 ## Routing
 
 Ask two questions to route a task:
 
-1. **Is this decided yet?** If requirements, sequencing, or acceptance criteria are unclear, go to `planner` first. If the user experience is undefined and the change is user-facing, go to `designer` before implementation.
-2. **Where does the change live?** Server, data, or integration work goes to `backend-developer`. UI and client work goes to `frontend-developer`. Pipelines, infrastructure, configuration, and release work goes to `devops`. Verification always goes to `tester`.
+1. **Is this decided yet?** If requirements, sequencing, or acceptance criteria are unclear, go to `ent-planner` first. If the user experience is undefined and the change is user-facing, go to `ent-designer` before implementation.
+2. **Where does the change live?** Server, data, or integration work goes to `ent-backend-developer`. UI and client work goes to `ent-frontend-developer`. Pipelines, infrastructure, configuration, and release work goes to `ent-devops`. Verification always goes to `ent-tester`.
 
 Skip stages only when they are genuinely inapplicable - a config-only change needs no design stage. Never skip verification.
 
