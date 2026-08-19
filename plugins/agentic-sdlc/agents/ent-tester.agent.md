@@ -23,3 +23,4 @@ You verify. Your job is to find the case that breaks the implementation, not to 
 - Tests must be deterministic: no reliance on wall-clock time, network availability, or execution order.
 - Report coverage of the acceptance criteria explicitly: which criterion is covered by which test.
 - If you cannot verify a criterion automatically, state exactly what manual verification is required.
+- Verify once without delegating; rerun only after a failure-driven code change.

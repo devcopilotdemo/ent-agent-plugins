@@ -1,6 +1,6 @@
 # agentic-sdlc
 
-A focused agentic SDLC delivery team for GitHub Copilot: seven specialist agents coordinated by ent-orchestrator, plus hooks that keep secrets and personal data out of the codebase.
+A focused agentic SDLC delivery team for GitHub Copilot: seven specialist agents coordinated by ent-orchestrator, plus end-of-session secret and personal-data warnings.
 
 Conforms to the [Agent Plugins Specification 1.0.0](https://github.com/agentplugins/agent-plugins-spec/blob/main/spec/1.0.0.md).
 
@@ -12,7 +12,7 @@ AI-assisted coding tends to be ad-hoc: a request goes in, a diff comes out, and 
 
 | Agent | Role |
 | --- | --- |
-| `ent-orchestrator` | Coordinates the team, delegates work, enforces quality gates, drives delivery to verified completion |
+| `ent-orchestrator` | Coordinates work that spans multiple independent workstreams or needs explicit cross-role sequencing |
 | `ent-planner` | Turns a request into a sequenced plan with testable acceptance criteria and agent ownership |
 | `ent-backend-developer` | APIs, services, business logic, data access, integrations — with tests |
 | `ent-frontend-developer` | UI implementation, client state, data wiring, accessibility — with tests |
@@ -20,25 +20,26 @@ AI-assisted coding tends to be ad-hoc: a request goes in, a diff comes out, and 
 | `ent-tester` | Test strategy and automated verification that acceptance criteria are actually met |
 | `ent-devops` | CI/CD, infrastructure as code, configuration, secret management, release, observability |
 
-Start with `ent-orchestrator` for any non-trivial change; invoke a specialist directly when the scope is already clear.
+Work directly for explanations, reviews, and localized deterministic fixes. Invoke one specialist for substantial single-owner work. Use `ent-orchestrator` only for multiple workstreams or explicit coordination.
 
 ## Delivery conventions
 
 - **Traceability.** `ent-planner` maps every plan to a GitHub issue and proposes creating or updating it — with your approval — before implementation starts.
 - **Branch and PR by default.** Implementation never lands on the default branch. Developers and `ent-devops` work on a dedicated branch and open a pull request linking the tracking issue, only after validation passes.
 - **GitHub Actions.** `ent-devops` assumes GitHub Actions in `.github/workflows/` as the default CI/CD system.
-- **Parallel delegation.** `ent-orchestrator` groups plan tasks into waves and fans them out in parallel wherever files and contracts are disjoint.
+- **Cost-aware delegation.** Reuse existing plans, use one implementation wave and one verifier by default, and add handoffs only for real dependencies or risk.
 - These agents use the GitHub MCP server (`github-mcp-server`) for issue and pull request operations.
 
 ## Hooks
 
-Two scanners ship with the plugin. Both run cross-platform (Bash on Linux/macOS, PowerShell on Windows).
+The scanners run cross-platform (Bash on Linux/macOS, PowerShell on Windows).
 
 | Hook | Event | Default mode | Behavior |
 | --- | --- | --- | --- |
-| `guard-commit` | `preToolUse` | `block` | Scans the staged index before a `git commit` runs and **denies the commit** if secrets or PII are found |
 | `scan-secrets` | `sessionEnd` | `warn` | Reports secrets in files changed during the session |
 | `scan-pii` | `sessionEnd` | `warn` | Reports personal data in files changed during the session |
+
+`guard-commit.sh` and `guard-commit.ps1` remain available for explicit repository or CI integration, but the plugin does not register a global `preToolUse` hook. VS Code currently ignores plugin hook matchers, which caused the guard process to launch before every read-only tool call. Agents instead require staged-diff inspection and available repository scanners before commit. Use GitHub secret scanning and push protection as the enforcement boundary.
 
 ### What is detected
 

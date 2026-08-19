@@ -8,7 +8,7 @@ Plugins here conform to the [Agent Plugins Specification 1.0.0](https://github.c
 
 | Plugin | Description |
 | --- | --- |
-| [`agentic-sdlc`](plugins/agentic-sdlc) | A seven-agent SDLC delivery team (ent-orchestrator, ent-planner, ent-backend-developer/ent-frontend-developer, ent-designer, ent-tester, ent-devops) with secret and PII scanning hooks. |
+| [`agentic-sdlc`](plugins/agentic-sdlc) | A seven-agent SDLC delivery team (ent-orchestrator, ent-planner, ent-backend-developer/ent-frontend-developer, ent-designer, ent-tester, ent-devops) with end-of-session secret and PII warnings. |
 
 ## Using the marketplace
 
