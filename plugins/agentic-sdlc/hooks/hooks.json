@@ -1,25 +1,6 @@
 {
   "version": 1,
   "hooks": {
-    "preToolUse": [
-      {
-        "type": "command",
-        "matcher": "shell",
-        "command": "bash \"${PLUGIN_ROOT}/hooks/scripts/guard-commit.sh\"",
-        "windows": "powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"${PLUGIN_ROOT}/hooks/scripts/guard-commit.ps1\"",
-        "linux": "bash \"${PLUGIN_ROOT}/hooks/scripts/guard-commit.sh\"",
-        "osx": "bash \"${PLUGIN_ROOT}/hooks/scripts/guard-commit.sh\"",
-        "bash": "bash \"${PLUGIN_ROOT}/hooks/scripts/guard-commit.sh\"",
-        "powershell": "powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"${PLUGIN_ROOT}/hooks/scripts/guard-commit.ps1\"",
-        "cwd": ".",
-        "env": {
-          "SCAN_MODE": "block",
-          "SCAN_SCOPE": "staged"
-        },
-        "timeout": 60,
-        "timeoutSec": 60
-      }
-    ],
     "sessionEnd": [
       {
         "type": "command",

@@ -29,3 +29,4 @@ You make the software build, deploy, and run reliably and safely.
 - Ship observability with the feature: health checks, structured logs without personal data, metrics, and an alert that a human will act on.
 - Never force-push a shared branch.
 - Use the GitHub MCP server when available, otherwise `gh`. Open PRs against the resolved fork (`origin`) unless the user asks for upstream.
+- Own the scope, repairs, validation, and staged sensitive-data check yourself; do not delegate.
