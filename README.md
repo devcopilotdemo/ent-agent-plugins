@@ -72,6 +72,21 @@ ent-agent-plugins/
 
 Plugin names must be lowercase alphanumeric with hyphens or periods, must start and end alphanumerically, and must not contain consecutive hyphens or periods.
 
+### Referencing hook scripts
+
+Plugins are installed outside the workspace, so hook commands cannot use paths relative to the working directory. A `"cwd": "."` in `hooks.json` resolves to the *workspace* root, not the plugin directory, so a bare `hooks/scripts/foo.ps1` fails with "does not exist".
+
+Clients also disagree on the substitution token: VS Code expands `${CLAUDE_PLUGIN_ROOT}`, while Copilot CLI uses `${PLUGIN_ROOT}`. An unrecognized token expands to an empty string, which produces a misleading error naming a path like `/hooks/scripts/foo.ps1`.
+
+Both clients inject their token as an environment variable, so resolve the root inside the command and fall back between the two rather than relying on token expansion:
+
+```jsonc
+"bash": "bash -c 'r=\"${CLAUDE_PLUGIN_ROOT:-$PLUGIN_ROOT}\"; bash \"$r/hooks/scripts/foo.sh\"'",
+"powershell": "powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command \"$r=if($env:CLAUDE_PLUGIN_ROOT){$env:CLAUDE_PLUGIN_ROOT}else{$env:PLUGIN_ROOT}; & \\\"$r/hooks/scripts/foo.ps1\\\"\""
+```
+
+Always quote the resulting path. An unquoted `${PLUGIN_ROOT}/...` in a PowerShell command is parsed as an expression and silently dropped.
+
 ## License
 
 [MIT](LICENSE)
