@@ -1,6 +1,6 @@
 {
   "name": "agentic-sdlc",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Agentic SDLC team with cost-aware routing, seven specialist agents, and end-of-session secret and PII warnings.",
   "author": {
     "name": "devcopilotdemo"
