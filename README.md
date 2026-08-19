@@ -76,16 +76,20 @@ Plugin names must be lowercase alphanumeric with hyphens or periods, must start 
 
 Plugins are installed outside the workspace, so hook commands cannot use paths relative to the working directory. A `"cwd": "."` in `hooks.json` resolves to the *workspace* root, not the plugin directory, so a bare `hooks/scripts/foo.ps1` fails with "does not exist".
 
-Clients also disagree on the substitution token: VS Code expands `${CLAUDE_PLUGIN_ROOT}`, while Copilot CLI uses `${PLUGIN_ROOT}`. An unrecognized token expands to an empty string, which produces a misleading error naming a path like `/hooks/scripts/foo.ps1`.
+Clients also disagree on the substitution token: VS Code expands `${CLAUDE_PLUGIN_ROOT}`, while the legacy Copilot CLI fields use `${PLUGIN_ROOT}`. An unrecognized token expands to an empty string, which produces a misleading error naming a path like `/hooks/scripts/foo.ps1`.
 
-Both clients inject their token as an environment variable, so resolve the root inside the command and fall back between the two rather than relying on token expansion:
+Use VS Code's documented `command` and OS-specific override fields with `${CLAUDE_PLUGIN_ROOT}`. Retain the legacy `bash` and `powershell` fields with `${PLUGIN_ROOT}` when the same plugin must support Copilot CLI:
 
 ```jsonc
-"bash": "bash -c 'r=\"${CLAUDE_PLUGIN_ROOT:-$PLUGIN_ROOT}\"; bash \"$r/hooks/scripts/foo.sh\"'",
-"powershell": "powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command \"$r=if($env:CLAUDE_PLUGIN_ROOT){$env:CLAUDE_PLUGIN_ROOT}else{$env:PLUGIN_ROOT}; & \\\"$r/hooks/scripts/foo.ps1\\\"\""
+"command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/foo.sh\"",
+"windows": "powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/foo.ps1\"",
+"linux": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/foo.sh\"",
+"osx": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/foo.sh\"",
+"bash": "bash \"${PLUGIN_ROOT}/hooks/scripts/foo.sh\"",
+"powershell": "powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"${PLUGIN_ROOT}/hooks/scripts/foo.ps1\""
 ```
 
-Always quote the resulting path. An unquoted `${PLUGIN_ROOT}/...` in a PowerShell command is parsed as an expression and silently dropped.
+Always quote the resulting path. Do not embed PowerShell `$variables` inside a nested double-quoted `-Command` string: the outer PowerShell process expands them before the child process starts.
 
 ## License
 
