@@ -89,8 +89,6 @@ agentic-sdlc/
 │   ├── ent-designer.agent.md
 │   ├── ent-tester.agent.md
 │   └── ent-devops.agent.md
-├── skills/
-│   └── sdlc-workflow/SKILL.md
 └── hooks/
     ├── hooks.json
     └── scripts/

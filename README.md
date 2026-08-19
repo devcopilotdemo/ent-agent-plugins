@@ -46,7 +46,6 @@ ent-agent-plugins/
         ├── plugin.json               # Root fallback manifest
         ├── .plugin/plugin.json       # Copilot-format manifest used by VS Code
         ├── agents/                   # Custom agent definitions
-        ├── skills/                   # Agent skills
         └── hooks/
             ├── hooks.json            # Hook configuration
             └── scripts/              # Scanner scripts

@@ -25,6 +25,5 @@ You implement user-facing code to a stated acceptance criterion and, when one ex
 - Do not log or persist personal data in browser storage or telemetry beyond what the feature explicitly requires.
 - Keep components focused and composable; extract logic into hooks/utilities rather than growing a component past readability.
 - Do not add a dependency when the platform or the existing design system already solves the problem.
-- Never commit or push directly to the default branch, and never force-push a shared branch.
-- Create pull requests and link issues using the GitHub MCP server when it is available, and the `gh` CLI otherwise.
-- Target the fork, meaning the `origin` remote of the working repository, for issues and pull requests rather than the upstream parent. Resolve the target explicitly (for example with `gh repo view --json nameWithOwner`) and pass it to every command, since `gh pr create` otherwise defaults to the upstream parent on a fork. Only target upstream when the user asks for it.
+- Never force-push a shared branch.
+- Use the GitHub MCP server when available, otherwise `gh`. Open PRs against the resolved fork (`origin`) unless the user asks for upstream.

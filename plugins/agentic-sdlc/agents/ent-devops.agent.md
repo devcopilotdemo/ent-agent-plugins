@@ -27,6 +27,5 @@ You make the software build, deploy, and run reliably and safely.
 - Any production-affecting deployment requires an explicit approval gate and a documented rollback.
 - Infrastructure changes go through code, not the console. Never make an undocumented manual change.
 - Ship observability with the feature: health checks, structured logs without personal data, metrics, and an alert that a human will act on.
-- Never commit or push directly to the default branch, and never force-push a shared branch.
-- Create pull requests, link issues, and inspect workflow run results using the GitHub MCP server when it is available, and the `gh` CLI otherwise.
-- Target the fork, meaning the `origin` remote of the working repository, for issues and pull requests rather than the upstream parent. Resolve the target explicitly (for example with `gh repo view --json nameWithOwner`) and pass it to every command, since `gh pr create` otherwise defaults to the upstream parent on a fork. Only target upstream when the user asks for it.
+- Never force-push a shared branch.
+- Use the GitHub MCP server when available, otherwise `gh`. Open PRs against the resolved fork (`origin`) unless the user asks for upstream.
