@@ -43,11 +43,13 @@ ent-agent-plugins/
 ├── .github/plugin/marketplace.json   # Marketplace catalog
 └── plugins/
     └── agentic-sdlc/
-        ├── plugin.json               # Plugin manifest (Copilot format)
+        ├── plugin.json               # Root fallback manifest
+        ├── .plugin/plugin.json       # Copilot-format manifest used by VS Code
         ├── agents/                   # Custom agent definitions
         ├── skills/                   # Agent skills
-        ├── hooks.json                # Hook configuration
-        └── hooks/scripts/            # Scanner scripts
+        └── hooks/
+            ├── hooks.json            # Hook configuration
+            └── scripts/              # Scanner scripts
 ```
 
 > **Note on `$schema`:** do not add the Agent Plugins 1.0 `$schema` field to a plugin that ships
@@ -76,15 +78,15 @@ Plugin names must be lowercase alphanumeric with hyphens or periods, must start 
 
 Plugins are installed outside the workspace, so hook commands cannot use paths relative to the working directory. A `"cwd": "."` in `hooks.json` resolves to the *workspace* root, not the plugin directory, so a bare `hooks/scripts/foo.ps1` fails with "does not exist".
 
-Clients also disagree on the substitution token: VS Code expands `${CLAUDE_PLUGIN_ROOT}`, while the legacy Copilot CLI fields use `${PLUGIN_ROOT}`. An unrecognized token expands to an empty string, which produces a misleading error naming a path like `/hooks/scripts/foo.ps1`.
+VS Code chooses its hook parser from the manifest location. A root-only `plugin.json` uses the legacy parser, which currently does not expand plugin-root placeholders in hook commands. Add `.plugin/plugin.json` and place the hook configuration at `hooks/hooks.json` to select the Copilot plugin parser that expands `${PLUGIN_ROOT}` and injects the corresponding environment variable.
 
-Use VS Code's documented `command` and OS-specific override fields with `${CLAUDE_PLUGIN_ROOT}`. Retain the legacy `bash` and `powershell` fields with `${PLUGIN_ROOT}` when the same plugin must support Copilot CLI:
+Use VS Code's documented `command` and OS-specific override fields with `${PLUGIN_ROOT}`. Retain the legacy `bash` and `powershell` fields for Copilot CLI compatibility:
 
 ```jsonc
-"command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/foo.sh\"",
-"windows": "powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/foo.ps1\"",
-"linux": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/foo.sh\"",
-"osx": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/foo.sh\"",
+"command": "bash \"${PLUGIN_ROOT}/hooks/scripts/foo.sh\"",
+"windows": "powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"${PLUGIN_ROOT}/hooks/scripts/foo.ps1\"",
+"linux": "bash \"${PLUGIN_ROOT}/hooks/scripts/foo.sh\"",
+"osx": "bash \"${PLUGIN_ROOT}/hooks/scripts/foo.sh\"",
 "bash": "bash \"${PLUGIN_ROOT}/hooks/scripts/foo.sh\"",
 "powershell": "powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"${PLUGIN_ROOT}/hooks/scripts/foo.ps1\""
 ```
